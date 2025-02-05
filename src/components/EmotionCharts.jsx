@@ -1,4 +1,5 @@
-// EmotionCharts.jsx
+// You might define your colors in a separate utils/colors.js if desired:
+// src/components/EmotionCharts.jsx
 import React, { useState } from "react";
 import { Bar, Pie } from "react-chartjs-2";
 import {
@@ -12,6 +13,7 @@ import {
   ArcElement,
 } from "chart.js";
 
+// Register necessary chart components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -22,7 +24,7 @@ ChartJS.register(
   ArcElement
 );
 
-// Map each emotion to a consistent color
+// You might define your colors in a separate utils/colors.js if desired:
 const chartColors = {
   neutral: "rgba(128, 128, 128, 0.6)",
   happy: "rgba(255, 205, 86, 0.6)",
@@ -33,7 +35,7 @@ const chartColors = {
   surprised: "rgba(255, 159, 64, 0.6)",
 };
 
-// A fixed order for labels
+// Fixed order so chart labels line up with the right colors
 const EMOTION_ORDER = [
   "neutral",
   "happy",
@@ -45,14 +47,15 @@ const EMOTION_ORDER = [
 ];
 
 export const EmotionCharts = ({ emotions }) => {
-  // State to track which chart is active
+  // The chart can toggle between Bar and Pie
   const [chartType, setChartType] = useState("bar");
 
-  // Build the data in a known order
+  // Construct datasets in a known order
   const labels = EMOTION_ORDER;
   const dataValues = EMOTION_ORDER.map((emo) => emotions[emo] || 0);
   const backgroundColors = EMOTION_ORDER.map((emo) => chartColors[emo]);
 
+  // Chart.js data object
   const chartData = {
     labels,
     datasets: [
@@ -64,7 +67,7 @@ export const EmotionCharts = ({ emotions }) => {
     ],
   };
 
-  // Options for Bar chart
+  // Options for the Bar chart
   const barOptions = {
     responsive: true,
     scales: {
@@ -83,10 +86,9 @@ export const EmotionCharts = ({ emotions }) => {
     },
   };
 
-  // Options for Pie chart
+  // Options for the Pie chart
   const pieOptions = {
     responsive: true,
-    // Turning off aspect ratio so we can control size via CSS
     maintainAspectRatio: false,
     plugins: {
       legend: { position: "bottom" },
@@ -94,14 +96,15 @@ export const EmotionCharts = ({ emotions }) => {
     },
   };
 
+  // Decide which chart to render
   const renderChart = () => {
     switch (chartType) {
       case "bar":
         return <Bar data={chartData} options={barOptions} />;
       case "pie":
-        // Wrap Pie chart in a small container to reduce its size
+        // Put the Pie chart in a smaller container to reduce size
         return (
-          <div style={{ width: "400px", height: "400px", margin: "0 auto" }}>
+          <div style={{ width: "300px", height: "300px", margin: "0 auto" }}>
             <Pie data={chartData} options={pieOptions} />
           </div>
         );
@@ -112,6 +115,7 @@ export const EmotionCharts = ({ emotions }) => {
 
   return (
     <div style={{ textAlign: "center" }}>
+      {/* Simple toggle buttons for switching charts */}
       <div style={{ marginBottom: "20px" }}>
         <button
           onClick={() => setChartType("bar")}
@@ -140,6 +144,7 @@ export const EmotionCharts = ({ emotions }) => {
         </button>
       </div>
 
+      {/* Render the chosen chart */}
       {renderChart()}
     </div>
   );

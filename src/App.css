@@ -1,0 +1,92 @@
+/* App.css */
+
+/* Overall container */
+.app-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  /* Main title styling */
+  .app-container h1 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Flex container to hold left (camera/face info) and right (charts) */
+  .main-content {
+    display: flex;
+    flex-direction: row;
+    gap: 20px; /* space between columns */
+  }
+  
+  /* Left column: fix some width or let it auto, your choice */
+  .left-column {
+    display: flex;
+    flex-direction: column; /* camera on top, face info below */
+    width: 40%; /* or any fraction you like */
+  }
+  
+  /* Right column to hold the charts */
+  .right-column {
+    flex: 1; /* take remaining space */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* charts aligned to top */
+  }
+  
+  /* The camera section (top-left corner) */
+  .camera-section {
+    margin-bottom: 20px; /* some spacing below camera */
+    padding: 10px;       /* internal padding around camera */
+    background-color: #f5f5f5;
+    border-radius: 8px;
+  }
+  
+  /* The camera wrapper from your existing Camera component
+     might already handle absolute positioning. Just ensure
+     it doesn't conflict with these styles. */
+  .camera-section video,
+  .camera-section canvas {
+    border: 1px solid #ccc; /* small border to clarify the camera area */
+  }
+  
+  /* Face info (below camera) */
+  .face-info-section {
+    background-color: #fafafa;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .face-info-section h3 {
+    margin-top: 0;
+  }
+  
+  /* Each face's details (you can style however you want) */
+  .face-details {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  /* On the right side, your EmotionCharts might have its own internal styling,
+     so we only define minimal structure here. */
+  .right-column > div {
+    width: 100%;
+    max-width: 600px; /* keep charts from getting too wide */
+  }
+  
+  /* Responsive idea: if you want a mobile-friendly layout,
+     you can add a media query to stack columns on narrower screens */
+  @media (max-width: 768px) {
+    .main-content {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .left-column,
+    .right-column {
+      width: 100%;
+      margin: 0;
+    }
+  }
+  

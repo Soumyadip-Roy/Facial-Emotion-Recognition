@@ -1,13 +1,13 @@
-// Camera.jsx
+// components/Camera.jsx
 import React from "react";
 
 export const Camera = ({ videoRef, canvasRef }) => {
   return (
-    <div style={{ position: "relative", width: "302px", height: "240px" }}>
+    <div style={{ position: "relative", width: "400px", height: "300px" }}>
       <video
         ref={videoRef}
-        width='320'
-        height='240'
+        width='400'
+        height='300'
         autoPlay
         muted
         style={{ position: "absolute" }}
